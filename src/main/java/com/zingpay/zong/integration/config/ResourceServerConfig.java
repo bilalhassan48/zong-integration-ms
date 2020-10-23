@@ -7,7 +7,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 
 /**
  * @author Bilal Hassan on 11-Sep-2020
- * @project swagger-ms
+ * @project zong-integration-microservice
  */
 
 

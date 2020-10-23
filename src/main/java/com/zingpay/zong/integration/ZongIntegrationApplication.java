@@ -6,7 +6,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author Bilal Hassan on 11-Sep-2020
- * @project swagger-ms
+ * @project zong-integration-microservice
  */
 
 @SpringBootApplication
