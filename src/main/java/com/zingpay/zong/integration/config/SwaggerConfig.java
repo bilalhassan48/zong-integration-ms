@@ -28,19 +28,7 @@ import java.util.List;
 @EnableSwagger2
 @Component
 @Primary
-@EnableAutoConfiguration
-public class SwaggerConfig implements SwaggerResourcesProvider {
-
-    @Value("${server.ip}")
-    private String serverIp;
-    @Value("${zingpay.port}")
-    private String zingpayPort;
-    @Value("${zingpay.url}")
-    private String zingpayUrl;
-    @Value("${auth.port}")
-    private String authPort;
-    @Value("${auth.url}")
-    private String authUrl;
+public class SwaggerConfig {
 
     @Bean
     public Docket swagConfig() {
@@ -52,29 +40,8 @@ public class SwaggerConfig implements SwaggerResourcesProvider {
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("ZingPay Microservice")
-                .description("ZingPay Microservice")
+        return new ApiInfoBuilder().title("Zong Integration Microservice")
+                .description("Zong Integration Microservice")
                 .build();
-    }
-
-    @Bean
-    public RestTemplate configureTemplate() {
-        return new RestTemplate();
-    }
-
-    @Override
-    public List<SwaggerResource> get() {
-        List<SwaggerResource> resources = new ArrayList<SwaggerResource>();
-        resources.add(swaggerResource("Auth-Service", "http://"+serverIp+":"+authPort+authUrl+"/v2/api-docs", "2.0"));
-        resources.add(swaggerResource("ZingPay-Service", "http://"+serverIp+":"+zingpayPort+zingpayUrl+"/v2/api-docs", "2.0"));
-        return resources;
-    }
-
-    private SwaggerResource swaggerResource(String name, String location, String version) {
-        SwaggerResource swaggerResource = new SwaggerResource();
-        swaggerResource.setName(name);
-        swaggerResource.setLocation(location);
-        swaggerResource.setSwaggerVersion(version);
-        return swaggerResource;
     }
 }
