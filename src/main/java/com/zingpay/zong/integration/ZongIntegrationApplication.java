@@ -2,7 +2,8 @@ package com.zingpay.zong.integration;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 /**
  * @author Bilal Hassan on 11-Sep-2020
@@ -10,7 +11,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 
 @SpringBootApplication
-@EnableSwagger2
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableResourceServer
 public class ZongIntegrationApplication {
 
     public static void main(String[] args) {
