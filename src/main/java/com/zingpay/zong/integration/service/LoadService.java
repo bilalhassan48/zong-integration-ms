@@ -34,7 +34,8 @@ public class LoadService {
         BankChannelService_Service bankChannelService_Service = new BankChannelService_Service();
         BankChannelService bankChannelService = bankChannelService_Service.getBankChannelServiceSOAP();
         try {
-            bankChannelService.bankRecharge(zongLoadDto.getChannelNum(), zongLoadDto.getChannelPassword(), zongLoadDto.getUserNum(), Integer.parseInt(zongLoadDto.getAmount()+""), xmlGregCal, new Holder<String>(zongLoadDto.getRequestId()), null, null, null);
+            long loadAmount = zongLoadDto.getAmount()*100;
+            bankChannelService.bankRecharge(zongLoadDto.getChannelNum(), zongLoadDto.getChannelPassword(), zongLoadDto.getUserNum(), Integer.parseInt(loadAmount+""), xmlGregCal, new Holder<String>(zongLoadDto.getRequestId()), null, null, null);
         } catch(Exception e) {
 
         }
