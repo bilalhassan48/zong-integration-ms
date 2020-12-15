@@ -13,6 +13,7 @@ import java.net.URL;
  * Generated source version: 2.2
  * 
  */
+
 @WebServiceClient(name = "bankChannelService", targetNamespace = "http://172.25.140.21:8070/bankChannelService/", wsdlLocation = "file:/C:/Users/Administrator/Desktop/bankChannelService.wsdl")
 public class BankChannelService_Service
     extends Service
