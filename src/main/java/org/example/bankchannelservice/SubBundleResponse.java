@@ -47,7 +47,9 @@ import javax.xml.bind.annotation.*;
     "servicetax",
     "ait",
     "bossId",
-    "requestId"
+    "requestId",
+    "transdate",
+    "bdname"
 })
 @XmlRootElement(name = "subBundleResponse")
 public class SubBundleResponse {
@@ -57,25 +59,29 @@ public class SubBundleResponse {
     @XmlElement(name = "DESC", required = true)
     protected String desc;
     @XmlElement(name = "BDPNOTAX")
-    protected int bdpnotax;
+    protected double bdpnotax;
     @XmlElement(name = "BDTAX")
-    protected int bdtax;
+    protected double bdtax;
     @XmlElement(name = "RECHARETAX")
-    protected int recharetax;
+    protected double recharetax;
     @XmlElement(name = "DISCOUNT")
-    protected int discount;
+    protected double discount;
     @XmlElement(name = "DEDUCTAMOUNT")
-    protected int deductamount;
+    protected double deductamount;
     @XmlElement(name = "SERVICEFEE")
-    protected int servicefee;
+    protected double servicefee;
     @XmlElement(name = "SERVICETAX")
-    protected int servicetax;
+    protected double servicetax;
     @XmlElement(name = "AIT")
-    protected int ait;
+    protected double ait;
     @XmlElement(required = true)
     protected String bossId;
     @XmlElement(required = true)
     protected String requestId;
+    @XmlElement(name = "TRANSDATE")
+    protected long transdate;
+    @XmlElement(name = "BDNAME")
+    protected String bdname;
 
     /**
      * Gets the value of the retn property.
@@ -121,7 +127,7 @@ public class SubBundleResponse {
      * Gets the value of the bdpnotax property.
      * 
      */
-    public int getBDPNOTAX() {
+    public double getBDPNOTAX() {
         return bdpnotax;
     }
 
@@ -129,7 +135,7 @@ public class SubBundleResponse {
      * Sets the value of the bdpnotax property.
      * 
      */
-    public void setBDPNOTAX(int value) {
+    public void setBDPNOTAX(double value) {
         this.bdpnotax = value;
     }
 
@@ -137,7 +143,7 @@ public class SubBundleResponse {
      * Gets the value of the bdtax property.
      * 
      */
-    public int getBDTAX() {
+    public double getBDTAX() {
         return bdtax;
     }
 
@@ -145,7 +151,7 @@ public class SubBundleResponse {
      * Sets the value of the bdtax property.
      * 
      */
-    public void setBDTAX(int value) {
+    public void setBDTAX(double value) {
         this.bdtax = value;
     }
 
@@ -153,7 +159,7 @@ public class SubBundleResponse {
      * Gets the value of the recharetax property.
      * 
      */
-    public int getRECHARETAX() {
+    public double getRECHARETAX() {
         return recharetax;
     }
 
@@ -161,7 +167,7 @@ public class SubBundleResponse {
      * Sets the value of the recharetax property.
      * 
      */
-    public void setRECHARETAX(int value) {
+    public void setRECHARETAX(double value) {
         this.recharetax = value;
     }
 
@@ -169,7 +175,7 @@ public class SubBundleResponse {
      * Gets the value of the discount property.
      * 
      */
-    public int getDISCOUNT() {
+    public double getDISCOUNT() {
         return discount;
     }
 
@@ -177,7 +183,7 @@ public class SubBundleResponse {
      * Sets the value of the discount property.
      * 
      */
-    public void setDISCOUNT(int value) {
+    public void setDISCOUNT(double value) {
         this.discount = value;
     }
 
@@ -185,7 +191,7 @@ public class SubBundleResponse {
      * Gets the value of the deductamount property.
      * 
      */
-    public int getDEDUCTAMOUNT() {
+    public double getDEDUCTAMOUNT() {
         return deductamount;
     }
 
@@ -193,7 +199,7 @@ public class SubBundleResponse {
      * Sets the value of the deductamount property.
      * 
      */
-    public void setDEDUCTAMOUNT(int value) {
+    public void setDEDUCTAMOUNT(double value) {
         this.deductamount = value;
     }
 
@@ -201,7 +207,7 @@ public class SubBundleResponse {
      * Gets the value of the servicefee property.
      * 
      */
-    public int getSERVICEFEE() {
+    public double getSERVICEFEE() {
         return servicefee;
     }
 
@@ -209,7 +215,7 @@ public class SubBundleResponse {
      * Sets the value of the servicefee property.
      * 
      */
-    public void setSERVICEFEE(int value) {
+    public void setSERVICEFEE(double value) {
         this.servicefee = value;
     }
 
@@ -217,7 +223,7 @@ public class SubBundleResponse {
      * Gets the value of the servicetax property.
      * 
      */
-    public int getSERVICETAX() {
+    public double getSERVICETAX() {
         return servicetax;
     }
 
@@ -225,7 +231,7 @@ public class SubBundleResponse {
      * Sets the value of the servicetax property.
      * 
      */
-    public void setSERVICETAX(int value) {
+    public void setSERVICETAX(double value) {
         this.servicetax = value;
     }
 
@@ -233,7 +239,7 @@ public class SubBundleResponse {
      * Gets the value of the ait property.
      * 
      */
-    public int getAIT() {
+    public double getAIT() {
         return ait;
     }
 
@@ -241,7 +247,7 @@ public class SubBundleResponse {
      * Sets the value of the ait property.
      * 
      */
-    public void setAIT(int value) {
+    public void setAIT(double value) {
         this.ait = value;
     }
 
@@ -293,4 +299,19 @@ public class SubBundleResponse {
         this.requestId = value;
     }
 
+    public long getTransdate() {
+        return transdate;
+    }
+
+    public void setTransdate(long transdate) {
+        this.transdate = transdate;
+    }
+
+    public String getBdname() {
+        return bdname;
+    }
+
+    public void setBdname(String bdname) {
+        this.bdname = bdname;
+    }
 }

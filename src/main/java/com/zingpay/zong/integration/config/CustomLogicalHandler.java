@@ -3,7 +3,10 @@ package com.zingpay.zong.integration.config;
 import com.zingpay.zong.integration.dto.BundlesResponseDto;
 import com.zingpay.zong.integration.service.LoadService;
 import com.zingpay.zong.integration.service.ZongBundlesService;
+import com.zingpay.zong.integration.service.ZongUserInfoService;
 import org.example.bankchannelservice.BankRechargeResponse;
+import org.example.bankchannelservice.GetUserInfoResponse;
+import org.example.bankchannelservice.SubBundleResponse;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -48,6 +51,10 @@ public class CustomLogicalHandler implements LogicalHandler<LogicalMessageContex
                     getBundles(rootElement);
                 } else if(rootElement.getTagName().contains("bankRechargeResponse")) {
                     bankRecharge(rootElement);
+                } else if(rootElement.getTagName().contains("subBundleResponse")) {
+                    subBundle(rootElement);
+                } else if(rootElement.getTagName().contains("getUserInfoResponse")) {
+                    getUserInfo(rootElement);
                 }
             }
 
@@ -99,7 +106,7 @@ public class CustomLogicalHandler implements LogicalHandler<LogicalMessageContex
                     bundlesResponseDto.setServiceFee(Integer.parseInt(bundlesArray[7]));
                     bundlesResponseDto.setServiceTax(Integer.parseInt(bundlesArray[8]));
                     bundlesResponseDto.setAit(Integer.parseInt(bundlesArray[9]));
-                    bundlesResponseDto.setRechargeRequired(Integer.parseInt(bundlesArray[10]));
+                    bundlesResponseDto.setRechargeRequired(Integer.parseInt(bundlesArray[10])/100);
                     if(ZongBundlesService.bundlesResponseDto == null) {
                         ZongBundlesService.bundlesResponseDto = new ArrayList<BundlesResponseDto>();
                     }
@@ -120,5 +127,55 @@ public class CustomLogicalHandler implements LogicalHandler<LogicalMessageContex
         System.out.println(bankRechargeResponse);
 
         LoadService.bankRechargeResponse = bankRechargeResponse;
+    }
+
+    private void subBundle(Element element) {
+        SubBundleResponse subBundleResponse = new SubBundleResponse();
+        if(getString("TRANSDATE", element) != null) {
+            subBundleResponse.setTransdate(Long.parseLong(getString("TRANSDATE", element)));
+        }
+        if(getString("SERVICETAX", element) != null) {
+            subBundleResponse.setSERVICETAX(Double.parseDouble(getString("SERVICETAX", element)));
+        }
+        subBundleResponse.setRETN(Integer.parseInt(getString("RETN", element)));
+        if(getString("BDTAX", element) != null) {
+            subBundleResponse.setBDTAX(Double.parseDouble(getString("BDTAX", element)));
+        }
+        if(getString("AIT", element) != null) {
+            subBundleResponse.setAIT(Double.parseDouble(getString("AIT", element)));
+        }
+        if(getString("DEDUCTAMOUNT", element) != null) {
+            subBundleResponse.setDEDUCTAMOUNT(Double.parseDouble(getString("DEDUCTAMOUNT", element)));
+        }
+        if(getString("SERVICEFEE", element) != null) {
+            subBundleResponse.setSERVICEFEE(Double.parseDouble(getString("SERVICEFEE", element)));
+        }
+        subBundleResponse.setDESC(getString("DESC", element));
+        if(getString("BDNAME", element) != null) {
+            subBundleResponse.setBdname(getString("BDNAME", element));
+        }
+        if(getString("DISCOUNT", element) != null) {
+            subBundleResponse.setDISCOUNT(Double.parseDouble(getString("DISCOUNT", element)));
+        }
+        if(getString("BDPNOTAX", element) != null) {
+            subBundleResponse.setBDPNOTAX(Double.parseDouble(getString("BDPNOTAX", element)));
+        }
+        subBundleResponse.setRequestId(getString("requestId", element));
+        if(getString("RECHARETAX", element) != null) {
+            subBundleResponse.setRECHARETAX(Double.parseDouble(getString("RECHARETAX", element)));
+        }
+
+        ZongBundlesService.subBundleResponse = subBundleResponse;
+    }
+
+    private void getUserInfo(Element element) {
+        GetUserInfoResponse getUserInfoResponse = new GetUserInfoResponse();
+        double balance = Double.parseDouble(getString("balance", element));
+        balance = balance/100;
+        getUserInfoResponse.setBalance(balance+"");
+        getUserInfoResponse.setBillType(Integer.parseInt(getString("billType", element)));
+        getUserInfoResponse.setDESC(getString("desc", element));
+        getUserInfoResponse.setRETN(Integer.parseInt(getString("retCode", element)));
+        ZongUserInfoService.getUserInfoResponse = getUserInfoResponse;
     }
 }

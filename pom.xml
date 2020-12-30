@@ -107,12 +107,12 @@
     <profiles>
         <profile>
             <id>local</id>
-            <!--<properties>
+            <properties>
                 <spring.profiles.active>local</spring.profiles.active>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
-            </activation>-->
+            </activation>
             <build>
                 <resources>
                     <resource>
@@ -126,9 +126,9 @@
             <properties>
                 <spring.profiles.active>dev</spring.profiles.active>
             </properties>
-            <activation>
+            <!--<activation>
                 <activeByDefault>true</activeByDefault>
-            </activation>
+            </activation>-->
             <build>
                 <resources>
                     <resource>
@@ -142,9 +142,9 @@
             <properties>
                 <spring.profiles.active>staging</spring.profiles.active>
             </properties>
-            <activation>
+            <!--<activation>
                 <activeByDefault>true</activeByDefault>
-            </activation>
+            </activation>-->
             <build>
                 <resources>
                     <resource>

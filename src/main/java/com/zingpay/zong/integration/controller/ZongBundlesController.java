@@ -6,6 +6,7 @@ import com.zingpay.zong.integration.util.StatusMessage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.example.bankchannelservice.GetBundles;
+import org.example.bankchannelservice.SubBundle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,9 +24,15 @@ public class ZongBundlesController extends BaseController {
     @Autowired
     private ZongBundlesService zongBundlesService;
 
-    @ApiOperation(value = "Takes in ZongLoadDto as requestbody and perform zong load.", response = Status.class)
+    @ApiOperation(value = "Takes in GetBundles object as requestbody and returns bundles list.", response = Status.class)
     @PostMapping
     public Status getBundles(@RequestBody GetBundles bundles) {
         return new Status(StatusMessage.SUCCESS, zongBundlesService.getBundlesList(bundles));
+    }
+
+    @ApiOperation(value = "Takes in SubBundle object as requestbody, subscribe bundle and returns SubBundle object.", response = Status.class)
+    @PutMapping
+    public Status subscribeBundle(@RequestBody SubBundle subBundle) {
+        return new Status(StatusMessage.SUCCESS, zongBundlesService.subscribeBundle(subBundle));
     }
 }
