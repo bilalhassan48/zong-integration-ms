@@ -1,9 +1,9 @@
 package com.zingpay.zong.integration.config;
 
+import com.zingpay.zong.integration.component.BundleComponent;
+import com.zingpay.zong.integration.component.LoadComponent;
+import com.zingpay.zong.integration.component.UserInfoComponent;
 import com.zingpay.zong.integration.dto.BundlesResponseDto;
-import com.zingpay.zong.integration.service.LoadService;
-import com.zingpay.zong.integration.service.ZongBundlesService;
-import com.zingpay.zong.integration.service.ZongUserInfoService;
 import org.example.bankchannelservice.BankRechargeResponse;
 import org.example.bankchannelservice.GetUserInfoResponse;
 import org.example.bankchannelservice.SubBundleResponse;
@@ -89,7 +89,7 @@ public class CustomLogicalHandler implements LogicalHandler<LogicalMessageContex
 
     private void getBundles(Element element) {
         String bundles = getString("PRODLIST", element);
-        ZongBundlesService.bundlesResponseDto = null;
+        BundleComponent.bundlesResponseDto = null;
         if(bundles.contains("#")) {
             String[] hashSplittedArray = bundles.split("#");
             for(int i=0; i<hashSplittedArray.length; i++) {
@@ -107,10 +107,10 @@ public class CustomLogicalHandler implements LogicalHandler<LogicalMessageContex
                     bundlesResponseDto.setServiceTax(Integer.parseInt(bundlesArray[8]));
                     bundlesResponseDto.setAit(Integer.parseInt(bundlesArray[9]));
                     bundlesResponseDto.setRechargeRequired(Integer.parseInt(bundlesArray[10])/100);
-                    if(ZongBundlesService.bundlesResponseDto == null) {
-                        ZongBundlesService.bundlesResponseDto = new ArrayList<BundlesResponseDto>();
+                    if(BundleComponent.bundlesResponseDto == null) {
+                        BundleComponent.bundlesResponseDto = new ArrayList<BundlesResponseDto>();
                     }
-                    ZongBundlesService.bundlesResponseDto.add(bundlesResponseDto);
+                    BundleComponent.bundlesResponseDto.add(bundlesResponseDto);
                 }
             }
         }
@@ -126,7 +126,7 @@ public class CustomLogicalHandler implements LogicalHandler<LogicalMessageContex
         bankRechargeResponse.setDESC(getString("DESC", element));
         System.out.println(bankRechargeResponse);
 
-        LoadService.bankRechargeResponse = bankRechargeResponse;
+        LoadComponent.bankRechargeResponse = bankRechargeResponse;
     }
 
     private void subBundle(Element element) {
@@ -165,7 +165,7 @@ public class CustomLogicalHandler implements LogicalHandler<LogicalMessageContex
             subBundleResponse.setRECHARETAX(Double.parseDouble(getString("RECHARETAX", element)));
         }
 
-        ZongBundlesService.subBundleResponse = subBundleResponse;
+        BundleComponent.subBundleResponse = subBundleResponse;
     }
 
     private void getUserInfo(Element element) {
@@ -176,6 +176,6 @@ public class CustomLogicalHandler implements LogicalHandler<LogicalMessageContex
         getUserInfoResponse.setBillType(Integer.parseInt(getString("billType", element)));
         getUserInfoResponse.setDESC(getString("desc", element));
         getUserInfoResponse.setRETN(Integer.parseInt(getString("retCode", element)));
-        ZongUserInfoService.getUserInfoResponse = getUserInfoResponse;
+        UserInfoComponent.getUserInfoResponse = getUserInfoResponse;
     }
 }

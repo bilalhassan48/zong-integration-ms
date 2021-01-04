@@ -1,6 +1,6 @@
 package com.zingpay.zong.integration.controller;
 
-import com.zingpay.zong.integration.service.ZongUserInfoService;
+import com.zingpay.zong.integration.component.UserInfoComponent;
 import com.zingpay.zong.integration.util.Status;
 import com.zingpay.zong.integration.util.StatusMessage;
 import io.swagger.annotations.Api;
@@ -23,11 +23,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class ZongUserInfoController extends BaseController {
 
     @Autowired
-    private ZongUserInfoService zongUserInfoService;
+    private UserInfoComponent userInfoComponent;
 
     @ApiOperation(value = "Takes in ZongLoadDto as dn, username and password and return user info object.", response = Status.class)
     @PostMapping
     public Status getUserInfo(@RequestBody GetUserInfo getUserInfo) {
-        return new Status(StatusMessage.SUCCESS, zongUserInfoService.getUserInfo(getUserInfo));
+        return new Status(StatusMessage.SUCCESS, userInfoComponent.getUserInfo(getUserInfo));
     }
 }

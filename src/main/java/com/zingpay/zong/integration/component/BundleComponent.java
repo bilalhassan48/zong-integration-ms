@@ -1,11 +1,10 @@
-package com.zingpay.zong.integration.service;
+package com.zingpay.zong.integration.component;
 
 import com.zingpay.zong.integration.config.CustomLogicalHandler;
 import com.zingpay.zong.integration.dto.BundlesResponseDto;
-import lombok.Getter;
-import lombok.Setter;
 import org.example.bankchannelservice.*;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Holder;
@@ -18,14 +17,21 @@ import java.util.List;
  * @project zong-integration-microservice
  */
 
-@Service
-@Getter
-@Setter
-public class ZongBundlesService {
+@Component
+public class BundleComponent {
 
     public static List<BundlesResponseDto> bundlesResponseDto;
 
     public static SubBundleResponse subBundleResponse;
+
+    @Value("${zong.channel.number}")
+    private String channelNumber;
+    @Value("${zong.channel.password}")
+    private String channelPassword;
+    @Value("${zong.username}")
+    private String zongUsername;
+    @Value("${zong.password}")
+    private String zongPassword;
 
     public List<BundlesResponseDto> getBundlesList(GetBundles bundles) {
         BankChannelService_Service bankChannelService_Service = new BankChannelService_Service();
@@ -48,7 +54,7 @@ public class ZongBundlesService {
             handlers.add(new CustomLogicalHandler());
             ((BindingProvider) bankChannelService).getBinding().setHandlerChain(handlers);
 
-            bankChannelService.subBundle("3155711432", "524624", subBundle.getUserNum(), subBundle.getBundleId(), new Holder<String>(subBundle.getRequestId()), "ZING", "ZING#8%23", null, null, null, null, null, null, null, null, null, null, null);
+            bankChannelService.subBundle(channelNumber, channelPassword, subBundle.getUserNum(), subBundle.getBundleId(), new Holder<String>(subBundle.getRequestId()), zongUsername, zongPassword, null, null, null, null, null, null, null, null, null, null, null);
         } catch (Exception e) {
 
         }

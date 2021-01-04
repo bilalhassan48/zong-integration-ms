@@ -1,11 +1,12 @@
-package com.zingpay.zong.integration.service;
+package com.zingpay.zong.integration.component;
 
 import com.zingpay.zong.integration.config.CustomLogicalHandler;
 import com.zingpay.zong.integration.dto.ZongLoadDto;
 import org.example.bankchannelservice.BankChannelService;
 import org.example.bankchannelservice.BankChannelService_Service;
 import org.example.bankchannelservice.BankRechargeResponse;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -22,12 +23,19 @@ import java.util.List;
  * @project zong-integration-microservice
  */
 
-@Service
-public class LoadService {
+@Component
+public class LoadComponent {
 
     public static BankRechargeResponse bankRechargeResponse;
 
+    @Value("${zong.channel.number}")
+    private String channelNum;
+    @Value("${zong.channel.password}")
+    private String channelPassword;
+
     public BankRechargeResponse zongLoad(ZongLoadDto zongLoadDto) {
+        zongLoadDto.setChannelNum(channelNum);
+        zongLoadDto.setChannelPassword(channelPassword);
         XMLGregorianCalendar xmlGregCal = null;
         try {
             xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());

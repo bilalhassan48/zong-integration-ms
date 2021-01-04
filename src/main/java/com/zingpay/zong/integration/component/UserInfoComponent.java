@@ -1,13 +1,11 @@
-package com.zingpay.zong.integration.service;
+package com.zingpay.zong.integration.component;
 
 import com.zingpay.zong.integration.config.CustomLogicalHandler;
-import lombok.Getter;
-import lombok.Setter;
 import org.example.bankchannelservice.BankChannelService;
 import org.example.bankchannelservice.BankChannelService_Service;
 import org.example.bankchannelservice.GetUserInfo;
 import org.example.bankchannelservice.GetUserInfoResponse;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.handler.Handler;
@@ -19,10 +17,8 @@ import java.util.List;
  * @project zong-integration-microservice
  */
 
-@Service
-@Getter
-@Setter
-public class ZongUserInfoService {
+@Component
+public class UserInfoComponent {
     public static GetUserInfoResponse getUserInfoResponse;
 
     public GetUserInfoResponse getUserInfo(GetUserInfo getUserInfo) {
