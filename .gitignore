@@ -263,3 +263,15 @@
 /.idea/modules.xml
 /.idea/vcs.xml
 /.idea/zong-integration-microservice.iml
+/target/classes/com/zingpay/zong/integration/component/BundleComponent.class
+/target/classes/com/zingpay/zong/integration/component/LoadComponent.class
+/target/classes/com/zingpay/zong/integration/component/UserInfoComponent.class
+/target/classes/com/zingpay/zong/integration/config/WebSecurityConfiguration.class
+/target/classes/com/zingpay/zong/integration/controller/BundleController.class
+/target/classes/com/zingpay/zong/integration/controller/UserInfoController.class
+/target/classes/com/zingpay/zong/integration/dto/BundleResponseDto.class
+/target/classes/com/zingpay/zong/integration/dto/LoadDto.class
+/target/classes/com/zingpay/zong/integration/dto/TransactionDto.class
+/target/classes/com/zingpay/zong/integration/feign/AuthServiceClient.class
+/target/classes/com/zingpay/zong/integration/feign/ZingPayServiceClient.class
+/target/classes/com/zingpay/zong/integration/rabbitmq/RabbitMQSender.class

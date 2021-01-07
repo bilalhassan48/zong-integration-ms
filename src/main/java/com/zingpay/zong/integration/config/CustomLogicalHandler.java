@@ -3,7 +3,7 @@ package com.zingpay.zong.integration.config;
 import com.zingpay.zong.integration.component.BundleComponent;
 import com.zingpay.zong.integration.component.LoadComponent;
 import com.zingpay.zong.integration.component.UserInfoComponent;
-import com.zingpay.zong.integration.dto.BundlesResponseDto;
+import com.zingpay.zong.integration.dto.BundleResponseDto;
 import org.example.bankchannelservice.BankRechargeResponse;
 import org.example.bankchannelservice.GetUserInfoResponse;
 import org.example.bankchannelservice.SubBundleResponse;
@@ -89,28 +89,28 @@ public class CustomLogicalHandler implements LogicalHandler<LogicalMessageContex
 
     private void getBundles(Element element) {
         String bundles = getString("PRODLIST", element);
-        BundleComponent.bundlesResponseDto = null;
+        BundleComponent.bundleResponseDto = null;
         if(bundles.contains("#")) {
             String[] hashSplittedArray = bundles.split("#");
             for(int i=0; i<hashSplittedArray.length; i++) {
                 if(hashSplittedArray[i].contains("|")) {
                     String[] bundlesArray = hashSplittedArray[i].split("\\|");
-                    BundlesResponseDto bundlesResponseDto = new BundlesResponseDto();
-                    bundlesResponseDto.setBundleId(bundlesArray[0]);
-                    bundlesResponseDto.setBundleName(bundlesArray[1]);
-                    bundlesResponseDto.setBdpnoTax(Integer.parseInt(bundlesArray[2]));
-                    bundlesResponseDto.setBdTax(Integer.parseInt(bundlesArray[3]));
-                    bundlesResponseDto.setRechargeTax(Integer.parseInt(bundlesArray[4]));
-                    bundlesResponseDto.setDiscount(Integer.parseInt(bundlesArray[5]));
-                    bundlesResponseDto.setDeductAmount(Integer.parseInt(bundlesArray[6]));
-                    bundlesResponseDto.setServiceFee(Integer.parseInt(bundlesArray[7]));
-                    bundlesResponseDto.setServiceTax(Integer.parseInt(bundlesArray[8]));
-                    bundlesResponseDto.setAit(Integer.parseInt(bundlesArray[9]));
-                    bundlesResponseDto.setRechargeRequired(Integer.parseInt(bundlesArray[10])/100);
-                    if(BundleComponent.bundlesResponseDto == null) {
-                        BundleComponent.bundlesResponseDto = new ArrayList<BundlesResponseDto>();
+                    BundleResponseDto bundleResponseDto = new BundleResponseDto();
+                    bundleResponseDto.setBundleId(bundlesArray[0]);
+                    bundleResponseDto.setBundleName(bundlesArray[1]);
+                    bundleResponseDto.setBdpnoTax(Integer.parseInt(bundlesArray[2]));
+                    bundleResponseDto.setBdTax(Integer.parseInt(bundlesArray[3]));
+                    bundleResponseDto.setRechargeTax(Integer.parseInt(bundlesArray[4]));
+                    bundleResponseDto.setDiscount(Integer.parseInt(bundlesArray[5]));
+                    bundleResponseDto.setDeductAmount(Integer.parseInt(bundlesArray[6]));
+                    bundleResponseDto.setServiceFee(Integer.parseInt(bundlesArray[7]));
+                    bundleResponseDto.setServiceTax(Integer.parseInt(bundlesArray[8]));
+                    bundleResponseDto.setAit(Integer.parseInt(bundlesArray[9]));
+                    bundleResponseDto.setRechargeRequired(Integer.parseInt(bundlesArray[10])/100);
+                    if(BundleComponent.bundleResponseDto == null) {
+                        BundleComponent.bundleResponseDto = new ArrayList<BundleResponseDto>();
                     }
-                    BundleComponent.bundlesResponseDto.add(bundlesResponseDto);
+                    BundleComponent.bundleResponseDto.add(bundleResponseDto);
                 }
             }
         }

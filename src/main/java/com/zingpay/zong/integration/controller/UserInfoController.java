@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/user-info")
 @Api(value="user", description="Contains methods related to Zong user.")
-public class ZongUserInfoController extends BaseController {
+public class UserInfoController extends BaseController {
 
     @Autowired
     private UserInfoComponent userInfoComponent;

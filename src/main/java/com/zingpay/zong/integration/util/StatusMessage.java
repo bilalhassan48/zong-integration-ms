@@ -9,7 +9,8 @@ import org.springframework.http.HttpStatus;
 
 public enum StatusMessage {
     FAILURE(0,"FAILURE", HttpStatus.NOT_FOUND),
-    SUCCESS(1,"SUCCESS", HttpStatus.OK)
+    SUCCESS(1,"SUCCESS", HttpStatus.OK),
+    REQUEST_RECEIVED_FOR_SUBSCRIBE_BUNDLE(30001,"Your request to subscribe bundle is received successfully", HttpStatus.OK)
     ;
 
     private StatusMessage(int id, String description, HttpStatus statusCode) {

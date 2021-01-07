@@ -1,7 +1,7 @@
 package com.zingpay.zong.integration.component;
 
 import com.zingpay.zong.integration.config.CustomLogicalHandler;
-import com.zingpay.zong.integration.dto.ZongLoadDto;
+import com.zingpay.zong.integration.dto.LoadDto;
 import org.example.bankchannelservice.BankChannelService;
 import org.example.bankchannelservice.BankChannelService_Service;
 import org.example.bankchannelservice.BankRechargeResponse;
@@ -33,9 +33,9 @@ public class LoadComponent {
     @Value("${zong.channel.password}")
     private String channelPassword;
 
-    public BankRechargeResponse zongLoad(ZongLoadDto zongLoadDto) {
-        zongLoadDto.setChannelNum(channelNum);
-        zongLoadDto.setChannelPassword(channelPassword);
+    public BankRechargeResponse zongLoad(LoadDto loadDto) {
+        loadDto.setChannelNum(channelNum);
+        loadDto.setChannelPassword(channelPassword);
         XMLGregorianCalendar xmlGregCal = null;
         try {
             xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
@@ -52,8 +52,8 @@ public class LoadComponent {
         ((BindingProvider)bankChannelService).getBinding().setHandlerChain(handlers);
 
         try {
-            long loadAmount = zongLoadDto.getAmount()*100;
-            bankChannelService.bankRecharge(zongLoadDto.getChannelNum(), zongLoadDto.getChannelPassword(), zongLoadDto.getUserNum(), Integer.parseInt(loadAmount+""), xmlGregCal, new Holder<String>(zongLoadDto.getRequestId()), null, null, null);
+            long loadAmount = loadDto.getAmount()*100;
+            bankChannelService.bankRecharge(loadDto.getChannelNum(), loadDto.getChannelPassword(), loadDto.getUserNum(), Integer.parseInt(loadAmount+""), xmlGregCal, new Holder<String>(loadDto.getRequestId()), null, null, null);
         } catch(Exception e) {
 
         }

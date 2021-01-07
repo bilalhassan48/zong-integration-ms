@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class ZongLoadDto {
+public class LoadDto {
     private String channelNum;
     private String channelPassword;
     private String userNum;

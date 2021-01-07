@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BundlesResponseDto {
+public class BundleResponseDto {
     private String bundleId;
     private String bundleName;
     private int bdpnoTax;
