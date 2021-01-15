@@ -2,6 +2,8 @@ package com.zingpay.zong.integration.controller;
 
 import com.zingpay.zong.integration.component.LoadComponent;
 import com.zingpay.zong.integration.dto.LoadDto;
+import com.zingpay.zong.integration.util.Status;
+import com.zingpay.zong.integration.util.StatusMessage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.example.bankchannelservice.BankRechargeResponse;
@@ -23,7 +25,7 @@ public class LoadController extends BaseController {
 
     @ApiOperation(value = "Takes in ZongLoadDto as requestbody and perform zong load.", response = BankRechargeResponse.class)
     @PostMapping
-    public BankRechargeResponse zongLoad(@RequestHeader("Authorization") String token, @RequestBody LoadDto loadDto) {
-        return loadComponent.zongLoad(loadDto);
+    public Status zongLoad(@RequestHeader("Authorization") String token, @RequestBody LoadDto loadDto) {
+        return new Status(StatusMessage.SUCCESS, loadComponent.zongLoad(loadDto));
     }
 }

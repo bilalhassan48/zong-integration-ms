@@ -32,10 +32,12 @@ public class LoadComponent {
     private String channelNum;
     @Value("${zong.channel.password}")
     private String channelPassword;
+    @Value("${zong.encryptedpassword}")
+    private String encryptedPassword;
 
     public BankRechargeResponse zongLoad(LoadDto loadDto) {
         loadDto.setChannelNum(channelNum);
-        loadDto.setChannelPassword(channelPassword);
+        loadDto.setChannelPassword(encryptedPassword);
         XMLGregorianCalendar xmlGregCal = null;
         try {
             xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
